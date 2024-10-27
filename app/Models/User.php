@@ -7,17 +7,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+
+    protected $table='users';
+
     protected $fillable = [
+        'nombre',
+        'documento',
+        'direccion',
+        'correo',
+        'telefono',
         'password',
     ];
 
@@ -40,4 +44,29 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Relación con los cursos que imparte (como docente)
+    public function cursosImpartidos(): HasMany
+    {
+        return $this->hasMany(Curso::class, 'docente_id');
+    }
+
+    // Relación con las matrículas (como estudiante)
+    public function matriculas(): HasMany
+    {
+        return $this->hasMany(Matricula::class, 'estudiante_id');
+    }
+
+    // Relación con los cursos registrados (como estudiante)
+    public function cursosRegistrados(): HasMany
+    {
+        return $this->hasMany(CursoRegistrado::class, 'estudiante_id');
+    }
+    /*
+    // Método requerido por Filament
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return true; // Personaliza según tus necesidades de acceso
+    }
+    */
 }
