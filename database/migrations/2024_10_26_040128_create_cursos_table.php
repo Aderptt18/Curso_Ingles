@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('vigencia');
             $table->date('fecha_inicio');
             $table->date('fecha_final');
+            $table->Integer('cupo_máximo');
             $table->unsignedBigInteger('docente_id');
             $table->foreign('docente_id')->references('id')->on('users')->onDelete('cascade');
 

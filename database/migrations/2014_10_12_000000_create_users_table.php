@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('direccion')->nullable();
             $table->string('correo')->unique();
             $table->string('telefono')->unique();
-            $table->boolean('estudiante')->default(false);
-            $table->boolean('docente')->default(false);
             $table->timestamps();
         });
     }
