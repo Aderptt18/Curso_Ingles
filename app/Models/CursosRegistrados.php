@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Cursos_registrados extends Model
+class CursosRegistrados extends Model
 {
     use HasFactory;
     protected $table='cursos_registrados';
@@ -28,6 +28,6 @@ class Cursos_registrados extends Model
     // Relación con el curso
     public function curso()
     {
-        return $this->belongsTo(Curso::class);
+        return $this->belongsTo(Cursos::class);
     }
 }

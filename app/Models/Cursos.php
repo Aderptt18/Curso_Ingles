@@ -37,12 +37,12 @@ class Cursos extends Model
 
     public function matriculas(): HasMany
     {
-        return $this->hasMany(Matricula::class);
+        return $this->hasMany(Matriculas::class);
     }
 
     public function cursosRegistrados(): HasMany
     {
-        return $this->hasMany(CursoRegistrado::class);
+        return $this->hasMany(Curso_Registrados::class);
     }
 
     // Método para verificar si hay cupos disponibles

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Matriculas extends Model
 {
     use HasFactory;
-    protected $table='users';
+    protected $table='matriculas';
 
     protected $fillable = [
         'fecha_matriculado',
@@ -23,7 +23,7 @@ class Matriculas extends Model
 
     public function curso(): BelongsTo
     {
-        return $this->belongsTo(Curso::class);
+        return $this->belongsTo(Cursos::class);
     }
 
     public function estudiante(): BelongsTo

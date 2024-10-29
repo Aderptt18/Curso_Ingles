@@ -8,8 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -17,10 +19,10 @@ class User extends Authenticatable
     protected $table='users';
 
     protected $fillable = [
-        'nombre',
+        'name',
         'documento',
         'direccion',
-        'correo',
+        'email',
         'telefono',
         'password',
     ];
@@ -62,11 +64,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(CursoRegistrado::class, 'estudiante_id');
     }
-    /*
+   
     // Método requerido por Filament
     public function canAccessPanel(Panel $panel): bool
     {
         return true; // Personaliza según tus necesidades de acceso
     }
-    */
+    
 }
