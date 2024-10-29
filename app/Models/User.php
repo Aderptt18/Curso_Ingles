@@ -72,5 +72,22 @@ class User extends Authenticatable implements FilamentUser
     {
         return true; // Personaliza según tus necesidades de acceso
     }
+
+    public function scopeFiltrarPorRol(Builder $query, User $usuarioActual): Builder
+    {
+        if ($usuarioActual->hasRole('super_admin')) {
+            return $query; // No aplica ningún filtro, muestra todo
+        }
+
+        if ($usuarioActual->hasRole('Docente')) {
+            return $query->whereHas('roles', fn ($q) => $q->where('name', 'Estudiante')); // Solo estudiantes
+        }
+
+        if ($usuarioActual->hasRole('Admin')) {
+            return $query->whereHas('roles', fn ($q) => $q->where('name', 'Docente')); // Solo docentes
+        }
+
+        return $query->where('id', $usuarioActual->id); // Otros roles ven solo su propio perfil
+    }
     
 }
