@@ -42,6 +42,9 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('telefono')
                     ->tel()
                     ->maxLength(255),
+                Forms\Components\CheckboxList::make('roles')
+                    ->relationship('roles', 'name')
+                    ->searchable()
             ]);
     }
 

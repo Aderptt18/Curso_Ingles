@@ -24,6 +24,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->profile()
             ->id('admin')
             ->path('admin')
             ->login()
@@ -53,6 +54,9 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+            ])
+            ->plugins([
+                \BezhanSalleh\FilamentShield\FilamentShieldPlugin::make()
             ]);
     }
 }
